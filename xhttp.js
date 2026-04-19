@@ -2,7 +2,7 @@
 
 import { connect } from 'cloudflare:sockets'
 
-const proxyIP = 'ProxyIP.SG.CMLiussss.net';  // proxyIP 用于访问cf cdn网站，例如chatgpt
+const proxyIP = 'proxyip.sg.cmliussss.net';//'13.230.34.30';  // proxyIP 用于访问cf cdn网站，例如chatgpt
 const yourUUID = 'b831381d-6324-4d53-ad4f-8cda48b30811'; // UUID
 
 let cfip = [ 
@@ -602,7 +602,7 @@ function generate_link(uuid, hostname, port, path, sni, currentHost, proxyIP = n
     const protc = 'x'+'h'+'t'+'t'+'p', header = 'v'+'l'+'e'+'s'+'s';
     const params = new URLSearchParams({
         encryption: 'none', security: 'tls', sni: sni || currentHost, fp: 'chrome', allowInsecure: '0', alpn: 'h2,http/1.1',
-        type: protc, host: currentHost, path: path.startsWith('/') ? path : `/${path}`, mode: 'stream-one'
+        type: protc, host: currentHost, path: path.startsWith('/') ? path : `/${path}`, mode: 'stream-one', ech: 'cloudflare-ech.com+https://223.5.5.5/dns-query'
     })
     
     if (proxyIP) {
@@ -644,9 +644,9 @@ export default {
         if (request.method === 'GET') {
             const path = url.pathname
             if (path === '/') {
-                return new Response(
-                    `<html>
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VLESS XHTTP</title><style>body{font-family:Arial,sans-serif;background:linear-gradient(135deg, #85dfb5 0%, #136e92 100%);min-height:100vh;display:flex;align-items:center;justify-content:center}.container{max-width:600px;background:#fff;padding:40px;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,.3);text-align:center}h1{color:#667eea;margin-bottom:20px}.info{font-size:18px;color:#666;margin:20px 0}.link{display:inline-block;background:#667eea;color:#fff;padding:12px 30px;border-radius:5px;text-decoration:none;margin-top:20px}.link:hover{background:#5568d3}.footer{margin-top:30px;padding-top:20px;border-top:1px solid #eee;font-size:14px;color:#999}.footer a{color:#667eea;text-decoration:none;margin:0 10px}.footer a:hover{text-decoration:underline}</style></head><body><div class="container"><h2>VLESS-XHTTP 代理服务</h2><div class="info">请访问: <strong>https://${url.hostname}/你的UUID</strong><br><br><p>查看节点订阅链接</p><div class="footer"><a href="https://github.com/eooce/CF-Workers-and-Snip-VLESS" target="_blank">GitHub 项目</a>|<a href="https://t.me/eooceu" target="_blank">Telegram 群组</a>|<a href="https://check-proxyip.ssss.nyc.mn" target="_blank">ProxyIP 检测服务</a></div></div></body></html>`,
+                return new Response('OK',
+                    //`<html>
+//<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VLESS XHTTP</title><style>body{font-family:Arial,sans-serif;background:linear-gradient(135deg, #85dfb5 0%, #136e92 100%);min-height:100vh;display:flex;align-items:center;justify-content:center}.container{max-width:600px;background:#fff;padding:40px;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,.3);text-align:center}h1{color:#667eea;margin-bottom:20px}.info{font-size:18px;color:#666;margin:20px 0}.link{display:inline-block;background:#667eea;color:#fff;padding:12px 30px;border-radius:5px;text-decoration:none;margin-top:20px}.link:hover{background:#5568d3}.footer{margin-top:30px;padding-top:20px;border-top:1px solid #eee;font-size:14px;color:#999}.footer a{color:#667eea;text-decoration:none;margin:0 10px}.footer a:hover{text-decoration:underline}</style></head><body><div class="container"><h2>VLESS-XHTTP 代理服务</h2><div class="info">请访问: <strong>https://${url.hostname}/你的UUID</strong><br><br><p>查看节点订阅链接</p><div class="footer"><a href="https://github.com/eooce/CF-Workers-and-Snip-VLESS" target="_blank">GitHub 项目</a>|<a href="https://t.me/eooceu" target="_blank">Telegram 群组</a>|<a href="https://check-proxyip.ssss.nyc.mn" target="_blank">ProxyIP 检测服务</a></div></div></body></html>`,
                     { headers: { 'Content-Type': 'text/html; charset=utf-8' } }
                 );
             }
